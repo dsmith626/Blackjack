@@ -1,0 +1,35 @@
+import java.util.*;
+public class Player {
+	
+	private int points;
+	private ArrayList <Card> hand;
+	
+	public Player() {
+		points = 0;
+		hand = new ArrayList<Card>();
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+	
+	public ArrayList getHand() {
+		return hand;
+	}
+	
+	public void addACard(Card c) {
+		hand.add(c);
+		points += c.getValue();
+	}
+	
+	public void showHand() {
+		for(int i = 0; i < hand.size();i++)
+			System.out.print(hand.get(i).draw() + ",  ");
+	}
+	
+	public void newHand() {
+		points = 0;
+		hand = new ArrayList<Card>();
+	}
+
+}
