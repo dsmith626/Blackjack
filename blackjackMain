@@ -1,0 +1,110 @@
+import java.util.*;
+public class BlackjackMain {
+	public static void main(String[]args) {
+
+		Scanner s = new Scanner(System.in);
+
+		String res = "yes";
+		int gameNum = 1;
+		System.out.println("******************* BLACKJACK ******************");
+
+		Player p = new Player();
+		Dealer d = new Dealer();
+
+		while(res.equals("yes")||res.equals("y")) {
+
+			System.out.println("******************** GAME " + gameNum + " ********************");
+			System.out.println();
+			gameNum++;
+
+			p.newHand();
+			d.newHand();
+
+			System.out.print("Deal to player :  ");
+			d.dealToPlayer(p);
+			System.out.print("Deal to dealer :  ");
+			d.dealToDealer();
+			System.out.print("Deal to player :  ");
+			d.dealToPlayer(p);
+			System.out.print("Deal to dealer :  ");
+			d.dealToDealer();
+
+			System.out.println();
+
+			System.out.print("Dealer's hand :   ");
+			d.showHand();
+			System.out.println();
+			System.out.println();
+
+			System.out.println("Dealer total : " + d.getPoints());
+			System.out.println();
+			System.out.print("Player's hand :   ");
+			p.showHand();
+			System.out.println();
+			System.out.println();
+
+			System.out.println("Player total : " + p.getPoints());
+
+			System.out.println();
+
+			System.out.println("hit or stay? (enter 'hit', 'h', 'stay', or 's')");
+			String r = s.nextLine();
+
+			boolean playerBust = false;
+
+			while((r.equals("hit")||r.equals("h")) && p.getPoints() <= 21) {
+				d.dealToPlayer(p);
+				System.out.print("Player : ");
+				p.showHand();
+				if(p.getPoints() > 21) {
+					playerBust = true;
+					System.out.println("YOU BUST!");
+					break;
+				}
+				else {
+					System.out.println();
+					System.out.println();
+					System.out.println("Player total : " + p.getPoints());
+				}
+
+				System.out.println("Hit again?");
+				r = s.nextLine();
+
+			}
+			if(playerBust!=true) {
+				while(d.getPoints() < 16) {
+					d.dealToDealer();
+					System.out.print("Dealer : ");
+					d.showHand();
+					if(d.getPoints() > 21) {
+						System.out.println("DEALER BUSTS!");
+						break;
+					}
+					System.out.println("Dealer total : " + d.getPoints());
+				}
+			}
+
+			if(p.getPoints() > 21)
+				System.out.println("Dealer Wins!");
+			else if (d.getPoints()>21)
+				System.out.println("YOU WIN!");
+			else if(p.getPoints() == d.getPoints())
+				System.out.println("TIE");
+			else if (p.getPoints() > d.getPoints())
+				System.out.println("YOU WIN!");
+			else if(d.getPoints()>p.getPoints())
+				System.out.println("Dealer Wins!");
+
+			System.out.println(d.getDeckCount() + " cards played in deck.");
+			System.out.println("Play again?");
+			res = s.nextLine();
+
+			if(res.equals("yes") || res.equals("y"))
+
+				d.checkDeck();
+
+			d.showDeck();
+
+		}
+	}
+}
