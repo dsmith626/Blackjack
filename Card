@@ -1,0 +1,95 @@
+import java.util.*;
+public class Card {
+	
+	private String suit;
+	private int value;
+	private String cardValue;
+	private int cv;
+	
+	public Card(int s, int v) {
+		if(s == 0)
+			suit = "♥️";
+		else if (s==1)
+			suit = "♦️";
+		else if(s==2)
+			suit = "♣️";
+		else if (s==3)
+			suit = "♠️";
+		
+		if(v == 0) {
+			cardValue = "A";
+			cv = 0;
+		}
+		else if(v==1) {
+			cardValue = "2";
+			cv = 1;
+		}
+		else if (v==2) {
+			cardValue = "3";
+			cv = 2;
+		}
+		else if (v==3) {
+			cardValue = "4";
+			cv = 3;
+		}
+		else if(v==4) {
+			cardValue = "5";
+			cv = 4;
+		}
+		else if (v==5) {
+			cardValue = "6";
+			cv = 5;
+		}
+		else if (v==6) {
+			cardValue = "7";
+			cv = 6;
+		}
+		else if(v==7) {
+			cardValue = "8";
+			cv = 7;
+		}
+		else if (v==8) {
+			cardValue = "9";
+			cv = 8;
+		}
+		else if (v==9) {
+			cardValue = "10";
+			cv = 9;
+		}
+		else if(v==10) {
+			cardValue = "J";
+			cv = 10;
+		}
+		else if (v==11) {
+			cardValue = "Q";
+			cv = 11;
+		}
+		else if (v == 12) {
+			cardValue = "K";
+			cv = 12;
+		}
+		
+		v++;
+		if(v >10)
+			v = 10;
+		value = v;
+		
+	}
+	
+	public int getcv() {
+		return cv;
+	}
+	
+	public String getSuit() {
+		return suit;
+	}
+	public int getValue() {
+		return value;
+	}
+	
+	public String draw() {
+		return (cardValue + " of " + suit);
+	}
+	
+	
+}
