@@ -1,0 +1,75 @@
+import java.util.*;
+public class Dealer extends Player{
+	
+	private Deck d;
+	
+	public Dealer() {
+			d = new Deck();
+	}
+	
+	public void showHand() {
+		for(int i = 0; i < super.getHand().size();i++)
+			System.out.print(((Card)super.getHand().get(i)).draw() + ",  ");
+	}
+	
+	public int getDeckCount() {
+		return d.numDelt;
+	}
+	
+	public void dealToPlayer(Player p) {
+		
+		int val = (int)(Math.random()*13);
+		int sui = (int)(Math.random()*4);
+		if(d.getCard(sui, val) == null) {
+			while (d.getCard(sui, val) == null) {
+				 val = (int)(Math.random()*13);
+				 sui = (int)(Math.random()*4);
+			}	
+		}
+		
+		Card c = d.getCard(sui, val);
+		
+		p.addACard(c);
+		d.removeCard(c);
+		
+		if(d.getNumDelt() >= 40)
+			d.generateDeck();
+		
+		System.out.println(c.draw());
+	}
+	public void dealToDealer() {
+		
+		int val = (int)(Math.random()*13);
+		int sui = (int)(Math.random()*4);
+		if(d.getCard(sui, val) == null) {
+			while (d.getCard(sui, val) == null) {
+				 val = (int)(Math.random()*13);
+				 sui = (int)(Math.random()*4);
+			}	
+		}
+		Card c = d.getCard(sui, val);
+		
+		super.addACard(c);
+		d.removeCard(c);
+		
+		if(d.getNumDelt() >= 40)
+			d.generateDeck();
+		
+		System.out.println(c.draw());
+	}
+	
+	public void checkDeck() {
+		if (d.numDelt >= 40) {
+			d = new Deck();
+		}
+	}
+	
+	public void showDeck() {
+		for(int r = 0; r < 4;r++)
+			for(int c = 0; c < 13;c++) {
+				if(d.getCard(r, c) != null)
+					System.out.println(d.getCard(r, c).draw() + "   ");
+			}
+	}
+
+}
